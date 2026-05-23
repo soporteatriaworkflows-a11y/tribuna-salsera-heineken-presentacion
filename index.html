@@ -1289,6 +1289,17 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 </div><!-- /deck -->
 </div><!-- /wrap -->
 
+<!-- Lightbox — debe ir ANTES del script para que getElementById lo encuentre -->
+<div id="lb-ov">
+  <div id="lb-panel">
+    <div id="lb-hd">
+      <span id="lb-ttl"></span>
+      <button id="lb-x" aria-label="Cerrar">&#215;</button>
+    </div>
+    <img id="lb-img" src="" alt="">
+  </div>
+</div>
+
 <div id="dots"></div>
 <div id="arrows">
   <button class="abtn" onclick="nav(-1)">&#8592;</button>
@@ -1378,16 +1389,5 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 
 }());
 </script>
-
-<!-- Lightbox -->
-<div id="lb-ov">
-  <div id="lb-panel">
-    <div id="lb-hd">
-      <span id="lb-ttl"></span>
-      <button id="lb-x" aria-label="Cerrar">&#215;</button>
-    </div>
-    <img id="lb-img" src="" alt="">
-  </div>
-</div>
 </body>
 </html>
