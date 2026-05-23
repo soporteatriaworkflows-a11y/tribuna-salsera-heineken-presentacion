@@ -185,6 +185,18 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
   .slide:last-child      { page-break-after:avoid; break-after:avoid; }
   #dots, #arrows         { display:none !important; }
 }
+
+/* === Lightbox === */
+#lb-ov { display:none; position:fixed; inset:0; z-index:9000; background:rgba(10,8,5,.8); align-items:center; justify-content:center; }
+#lb-ov.open { display:flex; }
+#lb-panel { background:var(--cream); border-radius:10px; box-shadow:0 28px 80px rgba(0,0,0,.6); max-width:88vw; max-height:82vh; display:flex; flex-direction:column; overflow:hidden; }
+#lb-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 20px 10px; flex-shrink:0; border-bottom:1px solid var(--cream-dd); }
+#lb-ttl { font-family:var(--fh); font-size:13px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--blue); }
+#lb-x { background:none; border:none; cursor:pointer; font-size:26px; line-height:1; color:var(--blue); opacity:.45; padding:0 6px; transition:opacity .15s; }
+#lb-x:hover { opacity:1; }
+#lb-img { max-width:88vw; max-height:calc(82vh - 52px); object-fit:contain; display:block; }
+.thumb-cl { cursor:pointer; transition:transform .18s ease, box-shadow .18s ease; }
+.thumb-cl:hover { transform:scale(1.03); box-shadow:0 0 0 2px var(--green), 0 8px 24px rgba(0,0,0,.4); position:relative; z-index:5; }
 </style>
 </head>
 <body>
@@ -668,21 +680,21 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 
     <!-- thumbnail strip -->
     <div style="display:flex; gap:4px; margin-top:14px;">
-      <div style="flex:1; height:158px; overflow:hidden; position:relative;">
+      <div class="thumb-cl" onclick="lbOpen('assets/renders/CUADRILATERO%20COMFANDI.png','Cuadrilátero · Comfandi')" style="flex:1; height:158px; overflow:hidden; position:relative;">
         <img src="assets/renders/CUADRILATERO%20COMFANDI.png?v=20260522" alt="Comfandi" style="width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;">
         <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 14px; background:rgba(8,6,4,.84); display:flex; align-items:center; justify-content:space-between;">
           <span class="label cw" style="font-size:10px;">Comfandi</span>
           <img src="assets/logos/Comfandi.png?v=20260522" alt="Comfandi" style="height:18px; filter:brightness(0) invert(1); object-fit:contain;">
         </div>
       </div>
-      <div style="flex:1; height:158px; overflow:hidden; position:relative;">
+      <div class="thumb-cl" onclick="lbOpen('assets/renders/CUADRILATERO%20ELECTROLIT.png','Cuadrilátero · Electrolit')" style="flex:1; height:158px; overflow:hidden; position:relative;">
         <img src="assets/renders/CUADRILATERO%20ELECTROLIT.png?v=20260522" alt="Electrolit" style="width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;">
         <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 14px; background:rgba(8,6,4,.84); display:flex; align-items:center; justify-content:space-between;">
           <span class="label cw" style="font-size:10px;">Electrolit</span>
           <img src="assets/logos/Electrolit.png?v=20260522" alt="Electrolit" style="height:18px; filter:brightness(0) invert(1); object-fit:contain;">
         </div>
       </div>
-      <div style="flex:1; height:158px; overflow:hidden; position:relative;">
+      <div class="thumb-cl" onclick="lbOpen('assets/renders/CUADRILATERO%20POSTOBON.png','Cuadrilátero · Postobón')" style="flex:1; height:158px; overflow:hidden; position:relative;">
         <img src="assets/renders/CUADRILATERO%20POSTOBON.png?v=20260522" alt="Postobón" style="width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;">
         <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 14px; background:rgba(8,6,4,.84); display:flex; align-items:center; justify-content:space-between;">
           <span class="label cw" style="font-size:10px;">Postobón</span>
@@ -805,28 +817,28 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 
   <!-- 2×2 grid -->
   <div class="g2x2">
-    <div class="gitem">
+    <div class="gitem thumb-cl" onclick="lbOpen('assets/renders/ACTIVACION%20REDBULL.png','Activación · Zona Red Bull')">
       <img src="assets/renders/ACTIVACION%20REDBULL.png?v=20260522" alt="Activación Red Bull">
       <div class="glab">
         <span class="glab-name">Zona Red Bull</span>
         <img src="assets/logos/Red_Bull.png?v=20260522" alt="Red Bull">
       </div>
     </div>
-    <div class="gitem">
+    <div class="gitem thumb-cl" onclick="lbOpen('assets/renders/ACTIVACION%20CLARO%20V2.png','Activación · Zona Claro')">
       <img src="assets/renders/ACTIVACION%20CLARO%20V2.png?v=20260522" alt="Activación Claro">
       <div class="glab">
         <span class="glab-name">Zona Claro</span>
         <img src="assets/logos/Claro.png?v=20260522" alt="Claro">
       </div>
     </div>
-    <div class="gitem">
+    <div class="gitem thumb-cl" onclick="lbOpen('assets/renders/ACTIVACION%20LICORES%20DEL%20VALLE.png','Activación · Zona ILV')">
       <img src="assets/renders/ACTIVACION%20LICORES%20DEL%20VALLE.png?v=20260522" alt="Activación ILV">
       <div class="glab">
         <span class="glab-name">Zona ILV</span>
         <img src="assets/logos/Industria_de_Licores_del_Valle_ILV.png?v=20260522" alt="ILV">
       </div>
     </div>
-    <div class="gitem">
+    <div class="gitem thumb-cl" onclick="lbOpen('assets/renders/ACTIVACION%20POSTOBON.png','Activación · Zona Postobón')">
       <img src="assets/renders/ACTIVACION%20POSTOBON.png?v=20260522" alt="Activación Postobón">
       <div class="glab">
         <span class="glab-name">Zona Postobón</span>
@@ -1332,9 +1344,30 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
   });
 
   document.getElementById('deck').addEventListener('click', function (e) {
-    if (!e.target.closest('#arrows') && !e.target.closest('#dots') && !e.target.closest('audio')) {
+    if (!e.target.closest('#arrows') && !e.target.closest('#dots') && !e.target.closest('audio') && !e.target.closest('.thumb-cl')) {
       nav(1);
     }
+  });
+
+  /* === Lightbox === */
+  var lbOv  = document.getElementById('lb-ov');
+  var lbImg = document.getElementById('lb-img');
+  var lbTtl = document.getElementById('lb-ttl');
+
+  window.lbOpen = function (src, title) {
+    lbImg.src = src;
+    lbTtl.textContent = title || '';
+    lbOv.classList.add('open');
+  };
+
+  document.getElementById('lb-x').addEventListener('click', function () {
+    lbOv.classList.remove('open');
+  });
+  lbOv.addEventListener('click', function (e) {
+    if (e.target === lbOv) lbOv.classList.remove('open');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') lbOv.classList.remove('open');
   });
 
   /* Console test — debe mostrar solo un slide */
@@ -1344,5 +1377,16 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 
 }());
 </script>
+
+<!-- Lightbox -->
+<div id="lb-ov">
+  <div id="lb-panel">
+    <div id="lb-hd">
+      <span id="lb-ttl"></span>
+      <button id="lb-x" aria-label="Cerrar">&#215;</button>
+    </div>
+    <img id="lb-img" src="" alt="">
+  </div>
+</div>
 </body>
 </html>
