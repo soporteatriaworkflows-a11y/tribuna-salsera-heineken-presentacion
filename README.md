@@ -42,3 +42,5 @@ assets/
   renders/          Renders 3D del recinto
   audio/            Pistas del evento
 ```
+
+Deploy update: corrección carga inicial y soporte móvil.
