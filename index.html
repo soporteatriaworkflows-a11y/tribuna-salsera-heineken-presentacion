@@ -183,7 +183,41 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
   .slide.layout-grid     { display:grid !important; }
   .slide.layout-split    { display:grid !important; }
   .slide:last-child      { page-break-after:avoid; break-after:avoid; }
-  #dots, #arrows         { display:none !important; }
+  #dots, #arrows, #ac-ov { display:none !important; }
+}
+
+/* === Access Screen === */
+#ac-ov { position:fixed; inset:0; z-index:20000; background:var(--cream); display:flex; align-items:center; justify-content:center; }
+#ac-ov.gone { display:none; }
+#ac-card {
+  position:relative; overflow:hidden;
+  width:min(480px, 92vw); padding:52px 48px 44px;
+  background:var(--cream);
+  border-top:5px solid var(--green);
+  box-shadow:0 24px 80px rgba(11,37,69,.14);
+  text-align:center;
+}
+#ac-inp {
+  width:100%; padding:14px 18px; margin-bottom:12px;
+  font-family:var(--fh); font-size:24px; font-weight:700;
+  letter-spacing:8px; text-transform:uppercase; text-align:center;
+  background:var(--cream-d); border:2px solid var(--cream-dd);
+  color:var(--blue); outline:none; transition:border-color .2s;
+}
+#ac-inp:focus { border-color:var(--green); }
+#ac-inp::placeholder { letter-spacing:4px; opacity:.4; font-size:16px; }
+#ac-btn {
+  width:100%; padding:14px 18px;
+  font-family:var(--fh); font-size:15px; font-weight:700;
+  letter-spacing:5px; text-transform:uppercase;
+  background:var(--green); color:#fff; border:none; cursor:pointer;
+  transition:background .2s;
+}
+#ac-btn:hover { background:#006830; }
+#ac-err {
+  min-height:22px; margin-top:12px;
+  font-family:var(--fh); font-size:12px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase; color:var(--red);
 }
 
 /* === Lightbox === */
@@ -234,7 +268,7 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
     <!-- center: logo real del evento -->
     <div>
       <!-- FAN FEST label -->
-      <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:28px;">
+      <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:16px;">
         <div style="width:32px; height:3px; background:var(--green);"></div>
         <span class="label" style="color:var(--green);">FAN FEST OFICIAL</span>
         <div style="width:32px; height:3px; background:var(--green);"></div>
@@ -243,9 +277,12 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
       <!-- Logo real del evento -->
       <img src="assets/logos/logo-tribuna-salsera.png?v=20260522" alt="La Tribuna Salsera" style="display:block; max-width:100%; max-height:340px; object-fit:contain; object-position:left;">
 
-      <div style="margin-top:32px;">
-        <div class="headline cb" style="font-size:26px; letter-spacing:6px;">CALI MUNDIALISTA · 2026</div>
-        <div class="body-md" style="color:rgba(11,37,69,.55); margin-top:6px; letter-spacing:2px;">FAN FEST · MÚSICA · CULTURA</div>
+      <!-- lockup compacto: ancho = ancho del texto, no de la columna -->
+      <div style="margin-top:10px; display:inline-flex; flex-direction:column; align-items:stretch;">
+        <div style="height:2px; background:var(--red);"></div>
+        <div style="font-family:var(--fh); font-size:40px; font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--blue); line-height:1; padding:10px 0; white-space:nowrap;">CALI MUNDIALISTA</div>
+        <div style="height:2px; background:var(--red);"></div>
+        <div style="font-family:var(--fh); font-size:15px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--blue); opacity:.75; padding-top:10px; white-space:nowrap;">FAN FEST, MÚSICA Y CULTURA</div>
       </div>
     </div>
 
@@ -1289,6 +1326,25 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 </div><!-- /deck -->
 </div><!-- /wrap -->
 
+<!-- Access Screen — debe ir ANTES del script -->
+<div id="ac-ov">
+  <!-- top stripe -->
+  <div style="position:absolute; top:0; left:0; right:0; height:7px; background:linear-gradient(90deg, var(--green) 0%, var(--green) 44%, var(--gold) 44%, var(--gold) 72%, var(--red) 72%);"></div>
+  <!-- ball pattern background -->
+  <img src="assets/logos/bg_pattern_balones_cream_teal.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.05; pointer-events:none;">
+  <div id="ac-card">
+    <img src="assets/logos/05_HEINEKEN_logo_oficial.png" alt="Heineken" style="height:36px; object-fit:contain; margin-bottom:20px;">
+    <div style="height:1px; background:var(--cream-dd); margin-bottom:20px;"></div>
+    <img src="assets/logos/logo-tribuna-salsera.png" alt="La Tribuna Salsera" style="display:block; max-width:260px; margin:0 auto 24px; object-fit:contain;">
+    <div style="font-family:var(--fh); font-size:22px; font-weight:900; letter-spacing:5px; text-transform:uppercase; color:var(--blue); margin-bottom:6px;">ACCESO PRIVADO</div>
+    <div style="font-family:var(--fh); font-size:11px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:rgba(11,37,69,.45); margin-bottom:28px;">Presentación comercial · La Tribuna Salsera</div>
+    <div style="font-family:var(--fb); font-size:13px; color:rgba(11,37,69,.55); margin-bottom:20px; line-height:1.5;">Ingresa el código de acceso para visualizar la presentación.</div>
+    <input id="ac-inp" type="text" placeholder="Código" autocomplete="off" spellcheck="false" maxlength="20">
+    <button id="ac-btn">Ingresar</button>
+    <div id="ac-err"></div>
+  </div>
+</div>
+
 <!-- Lightbox — debe ir ANTES del script para que getElementById lo encuentre -->
 <div id="lb-ov">
   <div id="lb-panel">
@@ -1307,6 +1363,32 @@ body { background: #0D1A0D; overflow: hidden; font-family: var(--fb); -webkit-fo
 </div>
 
 <script>
+/* === Access Screen === */
+(function () {
+  var ov  = document.getElementById('ac-ov');
+  var inp = document.getElementById('ac-inp');
+  var btn = document.getElementById('ac-btn');
+  var err = document.getElementById('ac-err');
+
+  if (sessionStorage.getItem('tls_ok') === '1') { ov.classList.add('gone'); return; }
+
+  function attempt() {
+    if (inp.value.trim().toUpperCase() === 'HKC2026') {
+      sessionStorage.setItem('tls_ok', '1');
+      ov.classList.add('gone');
+    } else {
+      err.textContent = 'Código incorrecto. Intenta nuevamente.';
+      inp.value = '';
+      inp.focus();
+    }
+  }
+
+  btn.addEventListener('click', attempt);
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') attempt(); });
+  inp.focus();
+}());
+
+/* === Deck === */
 (function () {
   'use strict';
 
